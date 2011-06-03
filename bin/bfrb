@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib", "bfrb.rb"))
+
+def usage
+	puts "Usage:"
+	puts "Pass code in as first command line parameter (in quotes): bfrb \",[.,]\""
+	puts "Specify a file to read: bfrb -f test.bf"
+end
+
+bfrb = BfRb::Base.new
+# if the command line params specify a file, run it
+# otherwise attempt to run code passed in as a param
+if ARGV.length > 1
+	if ARGV[0] == "-f"
+		bfrb.load_file(ARGV[1])
+	else
+		puts "Invalid arguments"
+		usage
+	end
+elsif ARGV.length > 0
+	bfrb.run(ARGV[0])
+else
+	usage
+end
