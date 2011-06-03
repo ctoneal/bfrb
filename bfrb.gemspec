@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["'Chris"]
+  s.authors = ["Chris ONeal"]
   s.date = %q{2011-06-03}
   s.default_executable = %q{bfrb}
-  s.description = %q{TODO: longer description of your gem}
+  s.description = %q{bfrb is a brainfuck interpreter written in Ruby.}
   s.email = %q{ctoneal@gmail.com}
   s.executables = ["bfrb"]
   s.extra_rdoc_files = [
