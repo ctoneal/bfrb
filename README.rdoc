@@ -28,5 +28,5 @@ You can also start an interactive interpreter by running bfrb without any parame
 
 == History
 
-v 0.1.1 - Added REPL.
-v 0.1.0 - Initial release.  Allows running code passed in or from a file.
+* 0.1.1 - Added REPL.
+* 0.1.0 - Initial release.  Allows running code passed in or from a file.
