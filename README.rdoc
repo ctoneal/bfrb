@@ -1,6 +1,6 @@
 = bfrb
 
-bfrb is a simple [brainfuck](http://www.muppetlabs.com/~breadbox/bf) interpreter written in Ruby.
+bfrb is a simple (brainfuck)[http://www.muppetlabs.com/~breadbox/bf] interpreter written in Ruby.
 
 == Usage
 
