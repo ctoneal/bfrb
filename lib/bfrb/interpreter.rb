@@ -30,13 +30,13 @@ module BfRb
 		# evaluate each instruction in the current code
 		def evaluate_code
 			while ((0 <= @program_counter) and (@program_counter < @code.length))
-				evaluate_instruction
+				evaluate_instruction(@code[@program_counter])
 			end
 		end
 		
 		# evaluate an individual instruction
-		def evaluate_instruction
-			case @code[@program_counter]
+		def evaluate_instruction(instruction)
+			case instruction
 			when ">"
 				@memory_counter += 1
 			when "<"
@@ -48,7 +48,9 @@ module BfRb
 			when "+"
 				@memory.set(@memory_counter, current_memory + 1)
 			when "-"
-				@memory.set(@memory_counter, current_memory - 1)
+				unless current_memory == 0
+					@memory.set(@memory_counter, current_memory - 1)
+				end
 			when "."
 				print current_memory.chr
 			when ","
