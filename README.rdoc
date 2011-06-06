@@ -1,6 +1,6 @@
 = bfrb
 
-bfrb is a simple brainfuck interpreter written in Ruby.
+bfrb is a simple [brainfuck](http://www.muppetlabs.com/~breadbox/bf/) interpreter written in Ruby.
 
 == Usage
 
@@ -15,3 +15,13 @@ After installation, you can use bfrb in two ways.  First, you can pass brainfuck
 Or, you can specify a file with the -f parameter:
 
 	% bfrb -f test.bf
+	
+== Things To Do
+
+* REPL (Although I'm not entirely sure how useful it would be, at least it's interesting)
+* Compiler
+* Unit Testing
+
+== History
+
+v 0.1.0 - Initial release.  Allows running code passed in or from a file.
