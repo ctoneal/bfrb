@@ -5,11 +5,14 @@ module BfRb
 	class Interpreter
 	
 		attr_reader :program_counter, :memory_counter
+		attr_accessor :input_stream, :output_stream
 	
 		# initialize the interpreter
 		def initialize
 			@memory = Memory.new
 			initialize_environment
+			@input_stream = $stdin
+			@output_stream = $stdout
 		end
 		
 		# cleans the memory and initializes member variables
@@ -52,9 +55,9 @@ module BfRb
 					@memory.set(@memory_counter, current_memory - 1)
 				end
 			when "."
-				print current_memory.chr
+				@output_stream.print current_memory.chr
 			when ","
-				input = $stdin.gets.getbyte(0)
+				input = @input_stream.gets.getbyte(0)
 				@memory.set(@memory_counter, input)
 			when "["
 				if current_memory != 0

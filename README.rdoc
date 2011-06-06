@@ -24,9 +24,9 @@ You can also start an interactive interpreter by running bfrb without any parame
 == Things To Do
 
 * Compiler
-* Unit Testing (The majority of language functions currently have tests, input/output still have no coverage)
 
 == History
 
+* 0.1.2 - Added unit tests
 * 0.1.1 - Added REPL.
 * 0.1.0 - Initial release.  Allows running code passed in or from a file.

@@ -69,6 +69,32 @@ module BfRb
 				@interpreter.evaluate_instruction("]")				
 				assert_not_equal(initial_value, @interpreter.program_counter)
 			end
-		end		
+		end
+
+		context "." do
+			should "output the intended character to the screen" do
+				@interpreter.evaluate_instruction("+")
+				output, input = IO.pipe
+				@interpreter.output_stream = input
+				@interpreter.evaluate_instruction(".")
+				input.close
+				value = output.getbyte
+				output.close
+				assert_equal(value, @interpreter.current_memory)
+			end
+		end
+		
+		context "," do
+			should "place the intended character in memory" do
+				output, input = IO.pipe
+				character = "a"
+				@interpreter.input_stream = output
+				input.write character
+				input.close
+				@interpreter.evaluate_instruction(",")
+				output.close
+				assert_equal(character.getbyte(0), @interpreter.current_memory)
+			end
+		end
 	end
 end
