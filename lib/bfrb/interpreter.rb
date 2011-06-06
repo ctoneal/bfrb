@@ -4,6 +4,8 @@ module BfRb
 	# interprets brainfuck code
 	class Interpreter
 	
+		attr_reader :program_counter, :memory_counter
+	
 		# initialize the interpreter
 		def initialize
 			@memory = Memory.new
@@ -19,17 +21,20 @@ module BfRb
 			@loop_stack = []
 		end
 		
+		# run a given piece of code
 		def run(code)
-			@code = code
+			@code += code
 			evaluate_code
 		end
 		
+		# evaluate each instruction in the current code
 		def evaluate_code
 			while ((0 <= @program_counter) and (@program_counter < @code.length))
 				evaluate_instruction
 			end
 		end
 		
+		# evaluate an individual instruction
 		def evaluate_instruction
 			case @code[@program_counter]
 			when ">"
@@ -41,16 +46,16 @@ module BfRb
 					@memory_counter = 0
 				end
 			when "+"
-				@memory.set(@memory_counter, @memory.get(@memory_counter) + 1)
+				@memory.set(@memory_counter, current_memory + 1)
 			when "-"
-				@memory.set(@memory_counter, @memory.get(@memory_counter) - 1)
+				@memory.set(@memory_counter, current_memory - 1)
 			when "."
-				print @memory.get(@memory_counter).chr
+				print current_memory.chr
 			when ","
 				input = $stdin.gets.getbyte(0)
 				@memory.set(@memory_counter, input)
 			when "["
-				if @memory.get(@memory_counter) != 0
+				if current_memory != 0
 					@loop_stack.push @program_counter
 				else
 					bracket_counter = 1
@@ -65,11 +70,16 @@ module BfRb
 				end
 			when "]"
 				matching_bracket = @loop_stack.pop
-				if @memory.get(@memory_counter) != 0
+				if current_memory != 0
 					@program_counter = matching_bracket - 1
 				end
 			end
 			@program_counter += 1
+		end
+		
+		# returns the value in the current memory cell
+		def current_memory
+			return @memory.get(@memory_counter)
 		end
 	end
 end

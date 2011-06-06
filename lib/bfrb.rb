@@ -19,5 +19,28 @@ module BfRb
 			code = File.open(file_path) { |f| f.read }
 			run(code)
 		end
+		
+		# interactive read-evaluate-print loop
+		def repl
+			puts "'exit' leaves the REPL"
+			puts "'mem' displays the value in the current cell of memory"
+			puts "'clear' clears everything from memory"
+			while true
+				puts ""
+				print "bf> "
+				input = gets.chomp
+				case input
+				when "exit"
+					puts "Exiting"
+					break
+				when "mem"
+					puts "Cell: #{@interpreter.memory_counter} Value: #{@interpreter.current_memory}"
+				when "clear"
+					@interpreter.initialize_environment
+				else
+					@interpreter.run(input)
+				end
+			end
+		end
 	end
 end
