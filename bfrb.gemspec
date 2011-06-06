@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{bfrb}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chris ONeal"]
@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
     "lib/bfrb/interpreter.rb",
     "lib/bfrb/memory.rb",
     "test/helper.rb",
-    "test/test_bfrb.rb"
+    "test/test_interpreter.rb"
   ]
   s.homepage = %q{http://github.com/ctoneal/bfrb}
   s.licenses = ["MIT"]
@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A simple brainfuck interpreter in Ruby}
   s.test_files = [
     "test/helper.rb",
-    "test/test_bfrb.rb"
+    "test/test_interpreter.rb"
   ]
 
   if s.respond_to? :specification_version then
