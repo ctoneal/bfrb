@@ -27,7 +27,30 @@ module BfRb
 		# run a given piece of code
 		def run(code)
 			@code += code
-			evaluate_code
+			if check_for_matching_braces
+				evaluate_code
+			end
+		end
+		
+		# checks the code to be run to make sure all braces match
+		def check_for_matching_braces
+			brace_counter = 0
+			@code.each_char do |char|
+				if char == "["
+					brace_counter += 1
+				elsif char == "]"
+					brace_counter -= 1
+					if brace_counter < 0
+						@output_stream.puts "Unmatched ]"
+						return false
+					end
+				end
+			end
+			if brace_counter > 0
+				@output_stream.puts "Unmatched ["
+				return false
+			end
+			return true
 		end
 		
 		# evaluate each instruction in the current code
@@ -57,6 +80,7 @@ module BfRb
 			when "."
 				@output_stream.print current_memory.chr
 			when ","
+				@output_stream.puts
 				input = @input_stream.gets.getbyte(0)
 				@memory.set(@memory_counter, input)
 			when "["

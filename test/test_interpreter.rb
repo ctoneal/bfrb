@@ -69,6 +69,26 @@ module BfRb
 				@interpreter.evaluate_instruction("]")				
 				assert_not_equal(initial_value, @interpreter.program_counter)
 			end
+			
+			should "inform the user if an unmatched [ exists" do
+				output, input = IO.pipe
+				@interpreter.output_stream = input
+				@interpreter.run("[")
+				input.close
+				value = output.gets.chomp
+				output.close
+				assert_equal("Unmatched [", value)
+			end
+			
+			should "inform the user if an unmatched ] exists" do
+				output, input = IO.pipe
+				@interpreter.output_stream = input
+				@interpreter.run("]")
+				input.close
+				value = output.gets.chomp
+				output.close
+				assert_equal("Unmatched ]", value)
+			end
 		end
 
 		context "." do
@@ -80,7 +100,7 @@ module BfRb
 				input.close
 				value = output.getbyte
 				output.close
-				assert_equal(value, @interpreter.current_memory)
+				assert_equal(@interpreter.current_memory, value)
 			end
 		end
 		

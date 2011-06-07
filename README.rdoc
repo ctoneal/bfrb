@@ -25,6 +25,7 @@ You can also start an interactive interpreter by running bfrb without any parame
 
 == History
 
+* 0.1.3 - Unmatched brace checks
 * 0.1.2 - Added unit tests
 * 0.1.1 - Added REPL.
 * 0.1.0 - Initial release.  Allows running code passed in or from a file.
