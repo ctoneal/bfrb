@@ -1,6 +1,8 @@
 = bfrb
 
-bfrb is a simple {brainfuck}[http://www.muppetlabs.com/~breadbox/bf] interpreter written in Ruby.
+bfrb is a simple {brainfuck}[http://www.muppetlabs.com/~breadbox/bf] interpreter written in Ruby.  
+It's not the most robust code, but it does the job, and has handled all the example code I've managed to
+throw at it.
 
 == Usage
 
@@ -20,10 +22,6 @@ Or, you can specify a file with the -f parameter:
 You can also start an interactive interpreter by running bfrb without any parameters
 	
 	% bfrb
-	
-== Things To Do
-
-* Compiler
 
 == History
 

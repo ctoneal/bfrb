@@ -5,7 +5,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib", "bfrb.rb
 def usage
 	puts "Usage:"
 	puts "Start interactive evaluation: bfrb"
-	puts "Pass code in as first command line parameter (in quotes): bfrb \",[.,]\""
+	puts "Pass code in as a command line parameter (in quotes): bfrb \",[.,]\""
 	puts "Specify a file to read: bfrb -f test.bf"
 	puts "View this message: bfrb -u"
 end
@@ -22,6 +22,7 @@ else
 		usage
 	when "-f"
 		if ARGV.length > 1
+			puts "Attempting to run file #{ARGV[1]}"
 			bfrb.load_file(ARGV[1])
 		else
 			puts "Invalid arguments"
