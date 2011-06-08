@@ -26,7 +26,7 @@ module BfRb
 		
 		# run a given piece of code
 		def run(code)
-			@code += code
+			@code += code.delete "^[]<>.,+-"
 			if check_for_matching_braces
 				evaluate_code
 			end
