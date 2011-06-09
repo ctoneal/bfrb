@@ -22,15 +22,15 @@ module BfRb
 		
 		# interactive read-evaluate-print loop
 		def repl
-			puts "'exit' leaves the REPL"
+			puts "'exit' or Ctrl-X leaves the REPL"
 			puts "'mem' displays the value in the current cell of memory"
 			puts "'clear' clears everything from memory"
 			while true
 				puts ""
-				print "bf> "
+				print "bfrb> "
 				input = gets.chomp
 				case input
-				when "exit"
+				when "exit", 24.chr
 					puts "Exiting"
 					break
 				when "mem"

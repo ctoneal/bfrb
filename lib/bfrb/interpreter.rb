@@ -28,7 +28,9 @@ module BfRb
 		def run(code)
 			@code += code.delete "^[]<>.,+-"
 			if check_for_matching_braces
-				evaluate_code
+				catch :quit do
+					evaluate_code
+				end
 			end
 		end
 		
@@ -63,26 +65,36 @@ module BfRb
 		# evaluate an individual instruction
 		def evaluate_instruction(instruction)
 			case instruction
+			# shift right in memory
 			when ">"
 				@memory_counter += 1
+			# shift left in memory, unless we're at the beginning
 			when "<"
 				if @memory_counter > 1
 					@memory_counter -= 1
 				else
 					@memory_counter = 0
 				end
+			# increment value in memory
 			when "+"
 				@memory.set(@memory_counter, current_memory + 1)
+			# decrement value in memory
 			when "-"
 				unless current_memory == 0
 					@memory.set(@memory_counter, current_memory - 1)
 				end
+			# print value in memory
 			when "."
 				@output_stream.print current_memory.chr
+			# input a character into memory
 			when ","
 				@output_stream.puts
 				input = @input_stream.gets.getbyte(0)
+				if input == 24
+					throw :quit
+				end
 				@memory.set(@memory_counter, input)
+			# jump to the closing bracket if memory is 0
 			when "["
 				if current_memory != 0
 					@loop_stack.push @program_counter
@@ -97,6 +109,7 @@ module BfRb
 						end
 					end
 				end
+			# return to the opening bracket if memory is not zero
 			when "]"
 				matching_bracket = @loop_stack.pop
 				if current_memory != 0
