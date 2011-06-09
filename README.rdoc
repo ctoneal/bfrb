@@ -12,7 +12,7 @@ To install bfrb:
 	
 Once bfrb is installed, you can use it to interpret your brainfuck code.  
 
-First, you can pass brainfuck code directly into it, as long as it is wrapped in quotes.
+First, you can pass brainfuck code directly into it, as long as it is wrapped in quotes:
 	
 	% bfrb ",[.,]"
 	
@@ -20,7 +20,7 @@ Or, you can specify a file with the -f parameter:
 
 	% bfrb -f test.bf
 	
-You can also start an interactive interpreter by running bfrb without any parameters
+You can also start an interactive interpreter by running bfrb without any parameters:
 	
 	% bfrb
 	
