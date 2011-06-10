@@ -1,35 +1,40 @@
 #!/usr/bin/env ruby
-
+require 'optparse'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib", "bfrb.rb"))
 
-def usage
-	puts "Usage:"
-	puts "Start interactive evaluation: bfrb"
-	puts "Pass code in as a command line parameter (in quotes): bfrb \",[.,]\""
-	puts "Specify a file to read: bfrb -f test.bf"
-	puts "View this message: bfrb -u"
+options = { :mode => :repl }
+op = OptionParser.new do |x|
+	x.banner = "bfrb <options>"
+	x.separator "\nUsing no options will start the interactive interpreter."
+	x.on("-f <file_path>", String, "Open a given file") do |f|
+		options[:mode] = :file
+		options[:file] = f
+	end
+	x.on("-c <code>", String, "Perform the given code") do |c|
+		options[:mode] = :code
+		options[:code] = c
+	end
+	x.on("-h", "Show this message") do
+		puts op
+		exit
+	end
+end
+begin
+	op.parse!(ARGV)
+rescue
+	puts "Could not parse command line arguments."
+	exit
 end
 
 bfrb = BfRb::Base.new
-# if the command line params specify a file, run it
-# otherwise attempt to run code passed in as a param
-if ARGV.length == 0
-	puts "Starting interactive evaluation"
+case options[:mode]
+when :repl
+	puts "Starting interactive interpreter..."
 	bfrb.repl
-else
-	case ARGV[0]
-	when "-u"
-		usage
-	when "-f"
-		if ARGV.length > 1
-			puts "Attempting to run file #{ARGV[1]}"
-			bfrb.load_file(ARGV[1])
-		else
-			puts "Invalid arguments"
-			usage
-		end
-	else
-		puts "Interpreting code"
-		bfrb.run(ARGV[0])
-	end
+when :file
+	puts "Running file..."
+	bfrb.load_file(options[:file])
+when :code
+	puts "Interpreting code..."
+	bfrb.run(options[:code])
 end

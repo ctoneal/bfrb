@@ -22,14 +22,14 @@ module BfRb
 		
 		# interactive read-evaluate-print loop
 		def repl
-			puts "'exit' or Ctrl-X leaves the REPL"
-			puts "'mem' displays the value in the current cell of memory"
-			puts "'clear' clears everything from memory"
+			puts "For interpreter commands, type 'help'"
 			while true
 				puts ""
 				print "bfrb> "
 				input = gets.chomp
 				case input
+				when "help"
+					repl_help
 				when "exit", 24.chr
 					puts "Exiting"
 					break
@@ -41,6 +41,14 @@ module BfRb
 					@interpreter.run(input)
 				end
 			end
+		end
+		
+		# prints out a help message
+		def repl_help
+			puts "'exit' or Ctrl-X leaves the REPL"
+			puts "'mem' displays the value in the current cell of memory"
+			puts "'clear' clears everything from memory"
+			puts "'help' displays this message"
 		end
 	end
 end
