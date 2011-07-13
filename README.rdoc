@@ -7,34 +7,34 @@ throw at it.
 == Usage
 
 To install bfrb:
-	
-	% gem install bfrb
-	
+    
+    % gem install bfrb
+    
 Once bfrb is installed, you can use it to interpret your brainfuck code.  
 
 First, you can pass brainfuck code directly into it, using the -c parameter:
-	
-	% bfrb -c ",[.,]"
-	
+    
+    % bfrb -c ",[.,]"
+    
 Or, you can specify a file with the -f parameter:
 
-	% bfrb -f test.bf
-	
+    % bfrb -f test.bf
+    
 You can also start an interactive interpreter by running bfrb without any parameters:
-	
-	% bfrb
-	
+    
+    % bfrb
+    
 The list of options is viewable with the -h parameter:
 
-	% bfrb -h
-	
+    % bfrb -h
+    
 Just in case you feel the need to use another language internally in a Ruby program, I guess you can:
 
-	require 'rubygems'
-	require 'bfrb'
-	
-	bf = BfRb::Interpreter.new
-	bf.run ",[.,]"
+    require 'rubygems'
+    require 'bfrb'
+    
+    bf = BfRb::Interpreter.new
+    bf.run ",[.,]"
 
 == History
 
